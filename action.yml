@@ -1,0 +1,25 @@
+# action.yml
+name: 'Python wheels manylinux build'
+author: 'galleon'
+description: 'Build manylinux wheels for a (Cython) Python package'
+inputs:
+  python-versions:
+    description: 'Python versions to target, space-separated'
+    required: true
+    default: 'cp37-cp37m cp38-cp38'
+  build-requirements:
+    descriptions: 'Packages required at build time, space-separated'
+    required: false
+    default: ''
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  env:
+    PLAT: 'manylinux2014_x86_64'
+  entrypoint: '/entrypoint.sh'
+  args:
+    - ${{ inputs.python-versions }}
+    - ${{ inputs.build-requirements }}
+branding:
+  icon: 'package'
+  color: 'green'
