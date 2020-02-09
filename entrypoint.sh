@@ -16,9 +16,9 @@ for PY_VER in "${arrPY_VERSIONS[@]}"; do
 done
 
 # Bundle external shared libraries into the wheels
-for whl in /github/workspace/wheelhouse/*.whl; do
+for whl in /github/workspace/dist/*.whl; do
     auditwheel repair "$whl" --plat manylinux1_x86_64 -w /github/workspace/dist/
 done
 
 echo "Succesfully build wheels:"
-ls /github/workspace/wheelhouse
+ls /github/workspace/dist
